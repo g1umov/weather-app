@@ -20,6 +20,7 @@
 		86F5BA1F290708C800C5C0EE /* UITableView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA1E290708C800C5C0EE /* UITableView + Extensions.swift */; };
 		86F5BA21290708DC00C5C0EE /* UITableViewCell + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA20290708DC00C5C0EE /* UITableViewCell + Extensions.swift */; };
 		86F5BA2429071F5000C5C0EE /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA2329071F5000C5C0EE /* ViewControllersFactory.swift */; };
+		86F5BA262907225500C5C0EE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA252907225500C5C0EE /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		86F5BA1E290708C800C5C0EE /* UITableView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extensions.swift"; sourceTree = "<group>"; };
 		86F5BA20290708DC00C5C0EE /* UITableViewCell + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extensions.swift"; sourceTree = "<group>"; };
 		86F5BA2329071F5000C5C0EE /* ViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
+		86F5BA252907225500C5C0EE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				86F5BA0D2906F36F00C5C0EE /* LocationService.swift */,
+				86F5BA252907225500C5C0EE /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				86F5BA0E2906F36F00C5C0EE /* LocationService.swift in Sources */,
 				86F5BA1C290707CE00C5C0EE /* LocationCell.swift in Sources */,
 				86F5B9F62906EE0B00C5C0EE /* SceneDelegate.swift in Sources */,
+				86F5BA262907225500C5C0EE /* NetworkService.swift in Sources */,
 				86F5BA1F290708C800C5C0EE /* UITableView + Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
