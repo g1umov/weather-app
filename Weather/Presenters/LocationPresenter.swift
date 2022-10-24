@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias LocationSelectionHandler = ((Location) -> Void)
+
 protocol LocationPresenter {
     func search(inputText: String?)
     func selectLocation(byIndex index: Int)
@@ -22,7 +24,7 @@ class LocationPresenterImpl: LocationPresenter {
     private var locations = [Location]()
     
     weak var delegate: LocationPresenterDelegate?
-    var completionHandler: ((Location) -> Void)?
+    var selectionHandler: LocationSelectionHandler?
     
     init(locationService: LocationService) {
         self.locationService = locationService
@@ -48,7 +50,7 @@ class LocationPresenterImpl: LocationPresenter {
         guard index <= (locations.count - 1) else { return }
         
         let location = locations[index]
-        completionHandler?(location)
+        selectionHandler?(location)
     }
     
     private func handleSuccess(locations: [Location]) {

@@ -19,6 +19,7 @@
 		86F5BA1C290707CE00C5C0EE /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA1B290707CE00C5C0EE /* LocationCell.swift */; };
 		86F5BA1F290708C800C5C0EE /* UITableView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA1E290708C800C5C0EE /* UITableView + Extensions.swift */; };
 		86F5BA21290708DC00C5C0EE /* UITableViewCell + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA20290708DC00C5C0EE /* UITableViewCell + Extensions.swift */; };
+		86F5BA2429071F5000C5C0EE /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA2329071F5000C5C0EE /* ViewControllersFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		86F5BA1B290707CE00C5C0EE /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		86F5BA1E290708C800C5C0EE /* UITableView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extensions.swift"; sourceTree = "<group>"; };
 		86F5BA20290708DC00C5C0EE /* UITableViewCell + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extensions.swift"; sourceTree = "<group>"; };
+		86F5BA2329071F5000C5C0EE /* ViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				86F5B9F32906EE0B00C5C0EE /* AppDelegate.swift */,
 				86F5B9F52906EE0B00C5C0EE /* SceneDelegate.swift */,
+				86F5BA2229071D4F00C5C0EE /* Factories */,
 				86F5BA082906F1FE00C5C0EE /* Views */,
 				86F5BA142906FD2A00C5C0EE /* Presenters */,
 				86F5BA092906F2F100C5C0EE /* Models */,
@@ -157,6 +160,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		86F5BA2229071D4F00C5C0EE /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				86F5BA2329071F5000C5C0EE /* ViewControllersFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,6 +244,7 @@
 				86F5BA21290708DC00C5C0EE /* UITableViewCell + Extensions.swift in Sources */,
 				86F5BA102906F4AF00C5C0EE /* Location.swift in Sources */,
 				86F5BA19290700A000C5C0EE /* LocationViewModel.swift in Sources */,
+				86F5BA2429071F5000C5C0EE /* ViewControllersFactory.swift in Sources */,
 				86F5BA0E2906F36F00C5C0EE /* LocationService.swift in Sources */,
 				86F5BA1C290707CE00C5C0EE /* LocationCell.swift in Sources */,
 				86F5B9F62906EE0B00C5C0EE /* SceneDelegate.swift in Sources */,
