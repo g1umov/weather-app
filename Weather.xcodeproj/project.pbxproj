@@ -14,6 +14,8 @@
 		86F5BA002906EE0B00C5C0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86F5B9FE2906EE0B00C5C0EE /* LaunchScreen.storyboard */; };
 		86F5BA0E2906F36F00C5C0EE /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA0D2906F36F00C5C0EE /* LocationService.swift */; };
 		86F5BA102906F4AF00C5C0EE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA0F2906F4AF00C5C0EE /* Location.swift */; };
+		86F5BA162906FD5500C5C0EE /* LocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA152906FD5500C5C0EE /* LocationPresenter.swift */; };
+		86F5BA19290700A000C5C0EE /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F5BA18290700A000C5C0EE /* LocationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		86F5BA012906EE0B00C5C0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86F5BA0D2906F36F00C5C0EE /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		86F5BA0F2906F4AF00C5C0EE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		86F5BA152906FD5500C5C0EE /* LocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPresenter.swift; sourceTree = "<group>"; };
+		86F5BA18290700A000C5C0EE /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 				86F5B9F32906EE0B00C5C0EE /* AppDelegate.swift */,
 				86F5B9F52906EE0B00C5C0EE /* SceneDelegate.swift */,
 				86F5BA082906F1FE00C5C0EE /* Views */,
+				86F5BA142906FD2A00C5C0EE /* Presenters */,
 				86F5BA092906F2F100C5C0EE /* Models */,
 				86F5BA072906F1D800C5C0EE /* Resources */,
 				86F5BA012906EE0B00C5C0EE /* Info.plist */,
@@ -108,6 +113,23 @@
 				86F5BA0F2906F4AF00C5C0EE /* Location.swift */,
 			);
 			path = StateObjects;
+			sourceTree = "<group>";
+		};
+		86F5BA142906FD2A00C5C0EE /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				86F5BA152906FD5500C5C0EE /* LocationPresenter.swift */,
+				86F5BA172907009600C5C0EE /* ViewModels */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		86F5BA172907009600C5C0EE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				86F5BA18290700A000C5C0EE /* LocationViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,8 +203,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				86F5B9F82906EE0B00C5C0EE /* ViewController.swift in Sources */,
+				86F5BA162906FD5500C5C0EE /* LocationPresenter.swift in Sources */,
 				86F5B9F42906EE0B00C5C0EE /* AppDelegate.swift in Sources */,
 				86F5BA102906F4AF00C5C0EE /* Location.swift in Sources */,
+				86F5BA19290700A000C5C0EE /* LocationViewModel.swift in Sources */,
 				86F5BA0E2906F36F00C5C0EE /* LocationService.swift in Sources */,
 				86F5B9F62906EE0B00C5C0EE /* SceneDelegate.swift in Sources */,
 			);
