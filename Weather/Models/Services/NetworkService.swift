@@ -36,8 +36,13 @@ class NetworkServiceImpl: NetwrorkService {
                     return
                 }
                 
-                if let _response = response as? HTTPURLResponse,
-                   (200..<300).contains(_response.statusCode) {
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    completionHandler(.failure(NetworkError.invalidResponseType))
+                    NSLog("Invalid response type, \(type(of: response.self))")
+                    return
+                }
+                
+                if (200..<300).contains(httpResponse.statusCode) {
                     guard let _data = data else {
                         completionHandler(.failure(NetworkError.emptyData))
                         NSLog("Request did finish with empty data")
@@ -52,8 +57,8 @@ class NetworkServiceImpl: NetwrorkService {
                         NSLog("Failed to decode data, \(error)")
                     }
                 } else {
-                    completionHandler(.failure(NetworkError.failedResponse))
-                    NSLog("Failed network response \(response!.description)")
+                    completionHandler(.failure(NetworkError.invalidHTTPStatusCode))
+                    NSLog("Invalid response status code \(httpResponse.statusCode)")
                 }
             }.resume()
         } catch {
@@ -68,8 +73,9 @@ extension NetworkServiceImpl {
     enum NetworkError: Error {
         case failedEndpoint
         case failedDecoding
-        case failedResponse
         case failedRequest
+        case invalidResponseType
+        case invalidHTTPStatusCode
         case emptyData
     }
 }
