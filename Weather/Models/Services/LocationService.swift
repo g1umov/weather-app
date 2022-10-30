@@ -30,7 +30,7 @@ class LocationServiceImpl: LocationService {
                     let coordinate = Location.Coordinate(latitude: location.coordinate.latitude,
                                                          longitude: location.coordinate.longitude)
                     
-                    return Location(name: name, state: state, country: country, coordinate: coordinate)
+                    return Location(city: name, state: state, country: country, coordinate: coordinate)
                 })
                         
                 completionHandler(.success(locations))

@@ -56,7 +56,7 @@ class LocationPresenterImpl: LocationPresenter {
     private func handleSuccess(locations: [Location]) {
         self.locations = locations
         
-        let viewModels = locations.map { "\($0.name), \($0.state), \($0.country)" }
+        let viewModels = locations.map { "\($0.city), \($0.state), \($0.country)" }
         delegate?.present(locations: viewModels)
     }
     
