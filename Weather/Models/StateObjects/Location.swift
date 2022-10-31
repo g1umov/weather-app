@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Location {
+struct Location: Hashable {
     let city: String
     let state: String
     let country: String
@@ -15,7 +15,7 @@ struct Location {
 }
 
 extension Location {
-    struct Coordinate {
+    struct Coordinate: Hashable {
         let latitude: Double
         let longitude: Double
     }
