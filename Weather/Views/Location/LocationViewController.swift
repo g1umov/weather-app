@@ -82,7 +82,7 @@ class LocationViewController: UIViewController {
 
 }
 
-extension LocationViewController: LocationPresenterDelegate {
+extension LocationViewController: LocationPresenterViewOutput {
     func present(locations: [LocationViewModel]) {
         DispatchQueue.main.async {
             self.viewModels = locations

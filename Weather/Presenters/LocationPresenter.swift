@@ -7,24 +7,32 @@
 
 import Foundation
 
-typealias LocationSelectionHandler = ((Location) -> Void)
+// MARK: - Location Presenter View's Interfaces
 
 protocol LocationPresenter {
     func search(inputText: String?)
     func selectLocation(byIndex index: Int)
 }
 
-protocol LocationPresenterDelegate: AnyObject {
+protocol LocationPresenterViewOutput: AnyObject {
     func present(locations: [LocationViewModel])
     func present(error: String)
 }
 
-class LocationPresenterImpl: LocationPresenter {
+// MARK: - Location Presenter Application's Interfaces
+
+protocol LocationPresenterAppOutput: AnyObject {
+    func didSelectLocation(_ location: Location)
+}
+
+// MARK: - Location Presenter Implementation
+
+final class LocationPresenterImpl: LocationPresenter {
     private let locationService: LocationService
     private var locations = [Location]()
     
-    weak var delegate: LocationPresenterDelegate?
-    var selectionHandler: LocationSelectionHandler?
+    weak var viewOutput: LocationPresenterViewOutput?
+    weak var appOutput: LocationPresenterAppOutput?
     
     init(locationService: LocationService) {
         self.locationService = locationService
@@ -50,19 +58,18 @@ class LocationPresenterImpl: LocationPresenter {
         guard index <= (locations.count - 1) else { return }
         
         let location = locations[index]
-        selectionHandler?(location)
+        appOutput?.didSelectLocation(location)
     }
     
     private func handleSuccess(locations: [Location]) {
         self.locations = locations
         
         let viewModels = locations.map { "\($0.city), \($0.state), \($0.country)" }
-        delegate?.present(locations: viewModels)
+        viewOutput?.present(locations: viewModels)
     }
     
     private func handleFailure(error: Error) {
-        delegate?.present(error: "No matching location found")
-        NSLog("Unable to forward geocode address, \(error)")
+        viewOutput?.present(error: "No matching location found")
     }
     
 }
