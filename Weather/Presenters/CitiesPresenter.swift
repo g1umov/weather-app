@@ -7,17 +7,32 @@
 
 import Foundation
 
+// MARK: - View Interfaces
+
 protocol CitiesPresenter {
     func prepareCities()
     func updateForecasts()
     func selectCity(index: Int)
 }
 
-protocol CitiesPresenterDelegate: AnyObject {
+protocol CitiesPresenterViewOutput: AnyObject {
     func present(viewModels: [CityViewModel])
     func update(viewModels: [CityViewModel])
+    func insert(viewModel: CityViewModel)
     func present(error: String)
 }
+
+// MARK: - External Interfaces
+
+protocol CitiesPresenterAppInput: AnyObject {
+    func insertLocation(_ location: Location)
+}
+
+protocol CitiesPresenterAppOutput: AnyObject {
+    func didSelectLocation(_ location: Location, with forecast: Forecast)
+}
+
+// MARK: - Presenter Implementation
 
 final class CitiesPresenterImpl: CitiesPresenter {
     private let locationPersistence: LocationPersistenceService
@@ -33,10 +48,10 @@ final class CitiesPresenterImpl: CitiesPresenter {
     
     private var actionState: ActionState = .none
     
-    // MARK: Outer dependecies
+    // MARK: Delegates
     
-    weak var delegate: CitiesPresenterDelegate?
-    var selectingHadnler: ((Location, Forecast) -> Void)?
+    weak var viewOutput: CitiesPresenterViewOutput?
+    weak var appOutput: CitiesPresenterAppOutput?
     
     init(locationPersistence: LocationPersistenceService,
          weatherService: WeatherService) {
@@ -61,7 +76,7 @@ final class CitiesPresenterImpl: CitiesPresenter {
         
         let selectedLocation = locations[index]
         if let selectedForecast = forecasts[selectedLocation] {
-            selectingHadnler?(selectedLocation, selectedForecast)
+            appOutput?.didSelectLocation(selectedLocation, with: selectedForecast)
         }
     }
     
@@ -82,7 +97,7 @@ final class CitiesPresenterImpl: CitiesPresenter {
     
     private func handleSuccess(of locations: [Location]) {
         guard !locations.isEmpty else {
-            delegate?.present(error: "Locations was not found")
+            viewOutput?.present(error: "Locations was not found")
             actionState = .none
             return
         }
@@ -92,17 +107,23 @@ final class CitiesPresenterImpl: CitiesPresenter {
     }
     
     private func handleFailure(with error: Error) {
-        delegate?.present(error: "Unable to load list of cities")
+        viewOutput?.present(error: "Unable to load list of cities")
         actionState = .none
     }
     
     private func loadForecasts(with locations: [Location]) {
-        locations.forEach { loadForecast(with: $0) }
-        notifyDispatchGroup()
+        locations.forEach { location in
+            dispatchGroup.enter()
+            loadForecast(with: location) { [weak self] in
+                guard let _self = self else { return }
+                _self.dispatchGroup.leave()
+            }
+        }
+        
+        setupDispatchGroup()
     }
     
-    private func loadForecast(with location: Location) {
-        dispatchGroup.enter()
+    private func loadForecast(with location: Location, completionHandler: @escaping () -> Void) {
         weatherService.getForecast(for: location.coordinate) { [weak self] result in
             guard let _self = self else { return }
             
@@ -110,20 +131,20 @@ final class CitiesPresenterImpl: CitiesPresenter {
                 _self.forecasts[location] = forecast
             }
             
-            _self.dispatchGroup.leave()
+            completionHandler()
         }
     }
     
-    private func notifyDispatchGroup() {
+    private func setupDispatchGroup() {
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let _self = self else { return }
             
-            let viewModels = _self.mapToViewModels()
+            let viewModels = _self.locations.map { _self.mapToViewModel($0) }
             switch _self.actionState {
             case .preparing:
-                _self.delegate?.present(viewModels: viewModels)
+                _self.viewOutput?.present(viewModels: viewModels)
             case .updating:
-                _self.delegate?.update(viewModels: viewModels)
+                _self.viewOutput?.update(viewModels: viewModels)
             case .none:
                 break
             }
@@ -132,16 +153,14 @@ final class CitiesPresenterImpl: CitiesPresenter {
         }
     }
     
-    private func mapToViewModels() -> [CityViewModel] {
-        return locations.map { location in
-            if let forecast = forecasts[location] {
-                let weathercode = mapWeathercode(forecast.currentWeather.weathercode)
-                let temperature = String(forecast.currentWeather.temperature)
-                return CityViewModel(city: location.city, weathercode: weathercode, temperature: temperature)
-            }
-            
-            return CityViewModel(city: location.city, weathercode: "exclamationmark.circle", temperature: "null")
+    private func mapToViewModel(_ location: Location) -> CityViewModel {
+        if let forecast = forecasts[location] {
+            let weathercode = mapWeathercode(forecast.currentWeather.weathercode)
+            let temperature = String(forecast.currentWeather.temperature)
+            return CityViewModel(city: location.city, weathercode: weathercode, temperature: temperature)
         }
+        
+        return CityViewModel(city: location.city, weathercode: "exclamationmark.circle", temperature: "null")
     }
     
     private func mapWeathercode(_ code: Forecast.Weathercode) -> String {
@@ -166,6 +185,21 @@ final class CitiesPresenterImpl: CitiesPresenter {
             return "cloud.rain"
         case .snowShowerSlight, .snowShowerHeavy:
             return "cloud.snow"
+        case .thunderstorm, .thunderstormHeavyHail, .thunderstormSlightHail:
+            return "wind"
+        }
+    }
+}
+
+extension CitiesPresenterImpl: CitiesPresenterAppInput {
+    func insertLocation(_ location: Location) {
+        locations.append(location)
+        locationPersistence.create(location: location) { _ in }
+        loadForecast(with: location) { [weak self] in
+            guard let _self = self else { return }
+            
+            let viewModel = _self.mapToViewModel(location)
+            _self.viewOutput?.insert(viewModel: viewModel)
         }
     }
 }

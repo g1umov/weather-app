@@ -80,7 +80,7 @@ final class CitiesViewController: UIViewController {
     }
 }
 
-extension CitiesViewController: CitiesPresenterDelegate {
+extension CitiesViewController: CitiesPresenterViewOutput {
     func present(viewModels: [CityViewModel]) {
         DispatchQueue.main.async {
             self.dataSource = viewModels
@@ -95,6 +95,13 @@ extension CitiesViewController: CitiesPresenterDelegate {
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
             self.errorLabel.isHidden = true
+        }
+    }
+    
+    func insert(viewModel: CityViewModel) {
+        DispatchQueue.main.async {
+            self.dataSource.append(viewModel)
+            self.tableView.reloadData()
         }
     }
     
