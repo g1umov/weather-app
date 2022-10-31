@@ -7,7 +7,7 @@
 
 import CoreData
 
-class PersistenceController {
+final class PersistenceController {
     private let persistenceContainer: NSPersistentContainer
     
     var viewContext: NSManagedObjectContext {

@@ -13,7 +13,7 @@ protocol WeatherService {
     func getForecast(for location: Location.Coordinate, completionHandler: @escaping CompletionHandler)
 }
 
-class WeatherServiceImpl: WeatherService {
+final class WeatherServiceImpl: WeatherService {
     private let networkService: NetwrorkService
     private lazy var jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()

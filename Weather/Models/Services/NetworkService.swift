@@ -17,7 +17,7 @@ protocol NetwrorkService {
                                       completionHandler: @escaping (Result<Response, Error>) -> Void)
 }
 
-class NetworkServiceImpl: NetwrorkService {
+final class NetworkServiceImpl: NetwrorkService {
     private let session: URLSession
     
     init(session: URLSession = .shared) {

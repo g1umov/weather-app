@@ -102,6 +102,7 @@ extension CitiesViewController: CitiesPresenterViewOutput {
         DispatchQueue.main.async {
             self.dataSource.append(viewModel)
             self.tableView.reloadData()
+            self.errorLabel.isHidden = true
         }
     }
     

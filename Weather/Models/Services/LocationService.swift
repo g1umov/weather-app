@@ -13,7 +13,7 @@ protocol LocationService {
     func geocode(addressString: String, completionHandler: @escaping CompletionHandler)
 }
 
-class LocationServiceImpl: LocationService {
+final class LocationServiceImpl: LocationService {
     private let geocoder = CLGeocoder()
     
     func geocode(addressString: String, completionHandler: @escaping CompletionHandler) {

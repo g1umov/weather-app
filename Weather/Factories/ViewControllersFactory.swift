@@ -21,7 +21,7 @@ final class ViewControllersFactory {
     }
     
     func createCities(output delegate: CitiesPresenterAppOutput, input configurator: (CitiesPresenterAppInput) -> Void) -> UIViewController {
-        let persistenceController = PersistenceController(modelName: "weather", inMemory: true)
+        let persistenceController = PersistenceController(modelName: "weather")
         let locationPersistence = LocationPersistenceServiceImpl(persistenceController: persistenceController)
         
         let networkService = NetworkServiceImpl()

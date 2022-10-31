@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationCell: UITableViewCell {
+final class LocationCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
