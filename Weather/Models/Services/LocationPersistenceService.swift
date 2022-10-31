@@ -20,8 +20,8 @@ final class LocationPersistenceServiceImpl: LocationPersistenceService {
     }
     
     func create(location: Location, completionHandler: @escaping (Result<Location, Error>) -> Void) {
-        let city = mapLocation(location)
         do {
+            let _ = mapLocation(location)
             try persistenceController.viewContext.save()
             completionHandler(.success(location))
         } catch {
