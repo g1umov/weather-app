@@ -48,6 +48,9 @@ extension Forecast {
         case rainShowerViolent = 82
         case snowShowerSlight = 85
         case snowShowerHeavy = 86
+        case thunderstorm = 95
+        case thunderstormSlightHail = 96
+        case thunderstormHeavyHail = 99
     }
     
     struct HourlyUnits: Decodable {
