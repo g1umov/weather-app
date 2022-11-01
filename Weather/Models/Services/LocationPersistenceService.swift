@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
 protocol LocationPersistenceService {
     func create(location: Location, completionHandler: @escaping (Result<Location, Error>) -> Void)
     func getLocations(completionHandler: @escaping (Result<[Location], Error>) -> Void)
+    func deleteLocation(_ location: Location, completionHandler: @escaping (Error?) -> Void)
 }
 
 final class LocationPersistenceServiceImpl: LocationPersistenceService {
@@ -41,6 +43,32 @@ final class LocationPersistenceServiceImpl: LocationPersistenceService {
         }
     }
     
+    func deleteLocation(_ location: Location, completionHandler: @escaping (Error?) -> Void) {
+        do {
+            let fetchRequest = City.fetchRequest()
+            let latitudePredicate = NSPredicate(format: "latitude = %lf", location.coordinate.latitude)
+            let longitudePredicate = NSPredicate(format: "longitude = %lf", location.coordinate.longitude)
+            
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                latitudePredicate,
+                longitudePredicate
+            ])
+            
+            let cities = try persistenceController.viewContext.fetch(fetchRequest)
+            
+            guard let city = cities.first else {
+                completionHandler(LocationPersistenceServiceError.objectWasNotFound)
+                return
+            }
+            
+            persistenceController.viewContext.delete(city)
+            try persistenceController.viewContext.save()
+            completionHandler(nil)
+        } catch {
+            completionHandler(error)
+        }
+    }
+    
     private func mapLocation(_ location: Location) -> City {
         let city = City(context: persistenceController.viewContext)
         city.name = location.city
@@ -66,5 +94,6 @@ final class LocationPersistenceServiceImpl: LocationPersistenceService {
 extension LocationPersistenceServiceImpl {
     enum LocationPersistenceServiceError: LocalizedError {
         case failedMapping
+        case objectWasNotFound
     }
 }

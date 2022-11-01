@@ -11,6 +11,7 @@ protocol CitiesPresenter {
     func prepareCities()
     func updateForecasts()
     func selectCity(index: Int)
+    func delete(at index: Int)
 }
 
 protocol CitiesPresenterViewOutput: AnyObject {
@@ -63,6 +64,18 @@ final class CitiesPresenterImpl: CitiesPresenter {
         let selectedLocation = locations[index]
         if let selectedForecast = forecasts[selectedLocation] {
             appOutput?.didSelectLocation(selectedLocation, with: selectedForecast)
+        }
+    }
+    
+    func delete(at index: Int) {
+        guard locations.count >= index else { return }
+        
+        let location = locations.remove(at: index)
+        locationPersistence.deleteLocation(location) { [weak self] error in
+            guard let _self = self else { return }
+            guard error != nil else { return }
+           
+            _self.viewOutput?.present(error: "Enable to delete location")
         }
     }
     

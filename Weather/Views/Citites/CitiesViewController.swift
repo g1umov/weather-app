@@ -147,4 +147,12 @@ extension CitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.selectCity(index: indexPath.item)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter.delete(at: indexPath.item)
+            dataSource.remove(at: indexPath.item)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
