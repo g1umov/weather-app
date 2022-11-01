@@ -9,6 +9,6 @@ import Foundation
 
 struct CityViewModel {
     let city: String
-    let weathercode: String
+    let weathercode: Forecast.Weathercode?
     let temperature: String
 }

@@ -155,39 +155,12 @@ final class CitiesPresenterImpl: CitiesPresenter {
     
     private func mapToViewModel(_ location: Location) -> CityViewModel {
         if let forecast = forecasts[location] {
-            let weathercode = mapWeathercode(forecast.currentWeather.weathercode)
+            let weathercode = forecast.currentWeather.weathercode
             let temperature = String(forecast.currentWeather.temperature)
             return CityViewModel(city: location.city, weathercode: weathercode, temperature: temperature)
         }
         
-        return CityViewModel(city: location.city, weathercode: "exclamationmark.circle", temperature: "null")
-    }
-    
-    private func mapWeathercode(_ code: Forecast.Weathercode) -> String {
-        switch code {
-        case .clearSky:
-            return "sun.max.fill"
-        case .partlyCloudy, .mainlyClear:
-            return "cloud.sun"
-        case .overCast:
-            return "cloud"
-        case .fog, .depositingRimeFog:
-            return "cloud.fog"
-        case .drizzleLight, .drizzleModerate, .drizzleDense, .freezingDrizzleLight, .freezingDrizzleDense:
-            return "cloud.drizzle.fill"
-        case .rainSlight, .rainModerate, .rainHeavy:
-            return "cloud.rain.fill"
-        case .freezingRainLight, .freezingRainHeavy:
-            return "cloud.sun.rain"
-        case .snowFallSlight, .snowFallModerate, .snowFallHeavy, .snowGrains:
-            return "snow"
-        case .rainShowerSlight, .rainShowerModerate, .rainShowerViolent:
-            return "cloud.rain"
-        case .snowShowerSlight, .snowShowerHeavy:
-            return "cloud.snow"
-        case .thunderstorm, .thunderstormHeavyHail, .thunderstormSlightHail:
-            return "wind"
-        }
+        return CityViewModel(city: location.city, weathercode: nil, temperature: "null")
     }
 }
 
