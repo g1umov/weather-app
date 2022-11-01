@@ -8,7 +8,7 @@
 import UIKit
 
 final class LocationViewController: UIViewController {
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.dataSource = self
@@ -17,7 +17,7 @@ final class LocationViewController: UIViewController {
         return tableView
     }()
     
-    lazy var errorLabel: UILabel = {
+    private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .lightText
@@ -41,18 +41,14 @@ final class LocationViewController: UIViewController {
     override func loadView() {
         super.loadView()
         setupView()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupSearchController()
+        setupLayouts()
     }
     
     private func setupView() {
         view.backgroundColor = .black
         view.addSubview(tableView)
         view.addSubview(errorLabel)
-        setupLayouts()
+        setupSearchController()
     }
     
     private func setupSearchController() {
@@ -65,15 +61,23 @@ final class LocationViewController: UIViewController {
     }
 
     private func setupLayouts() {
+        setupTableViewLayout()
+        setupErrorLabelLayout()
+    }
+    
+    private func setupTableViewLayout() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func setupErrorLabelLayout() {
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             errorLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             errorLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
             errorLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)

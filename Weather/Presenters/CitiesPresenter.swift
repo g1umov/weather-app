@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - View Interfaces
-
 protocol CitiesPresenter {
     func prepareCities()
     func updateForecasts()
@@ -22,8 +20,6 @@ protocol CitiesPresenterViewOutput: AnyObject {
     func present(error: String)
 }
 
-// MARK: - External Interfaces
-
 protocol CitiesPresenterAppInput: AnyObject {
     func insertLocation(_ location: Location)
 }
@@ -32,23 +28,15 @@ protocol CitiesPresenterAppOutput: AnyObject {
     func didSelectLocation(_ location: Location, with forecast: Forecast)
 }
 
-// MARK: - Presenter Implementation
-
 final class CitiesPresenterImpl: CitiesPresenter {
     private let locationPersistence: LocationPersistenceService
     private let weatherService: WeatherService
     private let dispatchGroup = DispatchGroup()
     
-    // MARK: Dat cache
-    
     private var locations: [Location] = []
     private var forecasts: [Location: Forecast] = [:]
     
-    // MARK: Helper flags
-    
     private var actionState: ActionState = .none
-    
-    // MARK: Delegates
     
     weak var viewOutput: CitiesPresenterViewOutput?
     weak var appOutput: CitiesPresenterAppOutput?
@@ -58,8 +46,6 @@ final class CitiesPresenterImpl: CitiesPresenter {
         self.locationPersistence = locationPersistence
         self.weatherService = weatherService
     }
-    
-    // MARK: CitiesPresenter methods
     
     func prepareCities() {
         actionState = .preparing
@@ -79,8 +65,6 @@ final class CitiesPresenterImpl: CitiesPresenter {
             appOutput?.didSelectLocation(selectedLocation, with: selectedForecast)
         }
     }
-    
-    // MARK: Helper methods
     
     private func loadCities() {
         locationPersistence.getLocations { [weak self] result in

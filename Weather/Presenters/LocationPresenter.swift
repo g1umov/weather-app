@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - Location Presenter View's Interfaces
-
 protocol LocationPresenter {
     func search(inputText: String?)
     func selectLocation(byIndex index: Int)
@@ -19,13 +17,9 @@ protocol LocationPresenterViewOutput: AnyObject {
     func present(error: String)
 }
 
-// MARK: - Location Presenter Application's Interfaces
-
 protocol LocationPresenterAppOutput: AnyObject {
     func didSelectLocation(_ location: Location)
 }
-
-// MARK: - Location Presenter Implementation
 
 final class LocationPresenterImpl: LocationPresenter {
     private let locationService: LocationService
