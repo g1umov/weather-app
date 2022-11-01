@@ -39,5 +39,10 @@ final class ViewControllersFactory {
         
         return viewController
     }
-    
+        
+    func createForecast(forecast: Forecast, location: Location) -> UIViewController {
+        let presenter = ForecastPresenterImpl(forecast: forecast, location: location)
+        let viewController = ForecastViewController(presenter: presenter)
+        return viewController
+    }
 }
