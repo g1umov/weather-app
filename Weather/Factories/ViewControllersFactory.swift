@@ -34,9 +34,6 @@ final class ViewControllersFactory {
         presenter.appOutput = delegate
         configurator(presenter)
         
-        // FIXME: Invoke in app delegate
-        persistenceController.loadPersistentStores(completionHandler: nil)
-        
         return viewController
     }
         

@@ -16,9 +16,6 @@ final class PersistenceController {
     
     init(modelName: String) {
         persistenceContainer = NSPersistentContainer(name: modelName)
-    }
-    
-    func loadPersistentStores(completionHandler: (() -> Void)?) {
         persistenceContainer.loadPersistentStores { (_, error) in
             if let _error = error {
                 fatalError("Unable to load Core Data stack, \(_error)")
