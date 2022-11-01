@@ -28,6 +28,15 @@ final class CitiesViewController: UIViewController {
         return label
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .white
+        activityIndicator.backgroundColor = .black.withAlphaComponent(0.6)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        return activityIndicator
+    }()
+    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(updateForecasts), for: .valueChanged)
@@ -54,18 +63,20 @@ final class CitiesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.prepareCities()
+        loadCities()
     }
     
     private func setupView() {
         view.backgroundColor = .lightGray
         view.addSubview(tableView)
         view.addSubview(errorLabel)
+        view.addSubview(activityIndicator)
     }
     
     private func setupLayouts() {
         setupTableViewLayout()
         setupErrorLabelLayout()
+        setupActivityIndicatorLayout()
     }
     
     private func setupTableViewLayout() {
@@ -87,6 +98,21 @@ final class CitiesViewController: UIViewController {
         ])
     }
     
+    private func setupActivityIndicatorLayout() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 60),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 60),
+        ])
+    }
+    
+    private func loadCities() {
+        activityIndicator.startAnimating()
+        presenter.prepareCities()
+    }
+    
     @objc private func updateForecasts() {
         presenter.updateForecasts()
     }
@@ -99,6 +125,7 @@ extension CitiesViewController: CitiesPresenterViewOutput {
             self.dataSource = viewModels
             self.tableView.reloadData()
             self.errorLabel.isHidden = true
+            self.activityIndicator.stopAnimating()
         }
     }
     
