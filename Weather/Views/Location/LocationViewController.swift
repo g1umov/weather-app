@@ -114,7 +114,7 @@ extension LocationViewController: UITableViewDataSource {
         let cell: LocationCell = tableView.dequeueReusableCell(for: indexPath)
         let viewModel = viewModels[indexPath.item]
         
-        cell.titleLabel.text = viewModel
+        cell.title = viewModel
         
         return cell
     }

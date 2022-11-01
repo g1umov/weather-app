@@ -8,7 +8,7 @@
 import UIKit
 
 final class LocationCell: UITableViewCell {
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
@@ -22,6 +22,11 @@ final class LocationCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    var title: String? {
+        get { titleLabel.text }
+        set { titleLabel.text = newValue }
     }
     
     private func setupView() {
