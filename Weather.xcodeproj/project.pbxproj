@@ -28,6 +28,7 @@
 		86958CF529112F6F008AD1F1 /* UIImage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86958CF429112F6F008AD1F1 /* UIImage + Extensions.swift */; };
 		86958CF829113624008AD1F1 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86958CF729113624008AD1F1 /* Date + Extensions.swift */; };
 		86958CFB29114702008AD1F1 /* Weathercodes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86958CFA29114702008AD1F1 /* Weathercodes.strings */; };
+		86958CFF29115F34008AD1F1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86958CFE29115F34008AD1F1 /* Endpoint.swift */; };
 		86CE752D290BF634003AB1AD /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CE752C290BF634003AB1AD /* WeatherService.swift */; };
 		86CE752F290BF813003AB1AD /* WeatherEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CE752E290BF813003AB1AD /* WeatherEndpoint.swift */; };
 		86CE7531290BF8D9003AB1AD /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CE7530290BF8D9003AB1AD /* Forecast.swift */; };
@@ -69,6 +70,7 @@
 		86958CF429112F6F008AD1F1 /* UIImage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extensions.swift"; sourceTree = "<group>"; };
 		86958CF729113624008AD1F1 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
 		86958CFA29114702008AD1F1 /* Weathercodes.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Weathercodes.strings; sourceTree = "<group>"; };
+		86958CFE29115F34008AD1F1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		86CE752C290BF634003AB1AD /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		86CE752E290BF813003AB1AD /* WeatherEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEndpoint.swift; sourceTree = "<group>"; };
 		86CE7530290BF8D9003AB1AD /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
@@ -174,6 +176,24 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		86958CFC29115EE5008AD1F1 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				86958CFE29115F34008AD1F1 /* Endpoint.swift */,
+				86CE752E290BF813003AB1AD /* WeatherEndpoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		86958CFD29115F06008AD1F1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				86F5BA252907225500C5C0EE /* NetworkService.swift */,
+				86958CFC29115EE5008AD1F1 /* Endpoints */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		86F5B9E72906EE0B00C5C0EE = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +220,7 @@
 				86F5BA082906F1FE00C5C0EE /* Views */,
 				86F5BA142906FD2A00C5C0EE /* Presenters */,
 				86F5BA092906F2F100C5C0EE /* Models */,
+				86958CFD29115F06008AD1F1 /* Networking */,
 				86560365290EDAA000AA0138 /* CoreData */,
 				86958CF62911360F008AD1F1 /* Extensions */,
 				86F5BA072906F1D800C5C0EE /* Resources */,
@@ -243,7 +264,6 @@
 			children = (
 				86F5BA0D2906F36F00C5C0EE /* LocationService.swift */,
 				86560378290EE38900AA0138 /* LocationPersistenceService.swift */,
-				86F5BA252907225500C5C0EE /* NetworkService.swift */,
 				86CE752C290BF634003AB1AD /* WeatherService.swift */,
 			);
 			path = Services;
@@ -254,7 +274,6 @@
 			children = (
 				86F5BA0F2906F4AF00C5C0EE /* Location.swift */,
 				86CE7530290BF8D9003AB1AD /* Forecast.swift */,
-				86CE752E290BF813003AB1AD /* WeatherEndpoint.swift */,
 			);
 			path = StateObjects;
 			sourceTree = "<group>";
@@ -388,6 +407,7 @@
 				86958CEF29105D3F008AD1F1 /* ForecastDetailView.swift in Sources */,
 				86F5BA21290708DC00C5C0EE /* UITableViewCell + Extensions.swift in Sources */,
 				86CE7531290BF8D9003AB1AD /* Forecast.swift in Sources */,
+				86958CFF29115F34008AD1F1 /* Endpoint.swift in Sources */,
 				865603912910168A00AA0138 /* ForecastViewModel.swift in Sources */,
 				86F5BA102906F4AF00C5C0EE /* Location.swift in Sources */,
 				86958CF129105EFA008AD1F1 /* ForecastDetailsView.swift in Sources */,

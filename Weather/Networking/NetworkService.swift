@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol Endpoint {
-    func asURL() throws -> URL
-}
-
 protocol NetwrorkService {
     func request<Response: Decodable>(_ endpoint: Endpoint,
                                       jsonDecoder: JSONDecoder,
