@@ -46,10 +46,14 @@ final class CitiesViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         setupView()
         setupLayouts()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter.prepareCities()
     }
     
@@ -60,15 +64,23 @@ final class CitiesViewController: UIViewController {
     }
     
     private func setupLayouts() {
+        setupTableViewLayout()
+        setupErrorLabelLayout()
+    }
+    
+    private func setupTableViewLayout() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func setupErrorLabelLayout() {
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             errorLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             errorLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
             errorLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
@@ -78,6 +90,7 @@ final class CitiesViewController: UIViewController {
     @objc private func updateForecasts() {
         presenter.updateForecasts()
     }
+    
 }
 
 extension CitiesViewController: CitiesPresenterViewOutput {
