@@ -25,6 +25,7 @@ final class AppCoordinator: Coordinator {
     }
     
     func configure() {
+        navigationController.navigationBar.tintColor = .white
         configureCities()
     }
     
@@ -37,7 +38,11 @@ final class AppCoordinator: Coordinator {
         navigationController.viewControllers = [viewController]
         viewController.navigationItem.title = "Cities"
         viewController.navigationItem.rightBarButtonItem = barButtonItem
-        viewController.navigationItem.rightBarButtonItem!.tintColor = .white
+    }
+    
+    private func presentForecast(forecast: Forecast, location: Location) {
+        let viewController = viewControllersFactory.createForecast(forecast: forecast, location: location)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     @objc private func presentLocation() {
@@ -57,6 +62,6 @@ extension AppCoordinator: LocationPresenterAppOutput {
 
 extension AppCoordinator: CitiesPresenterAppOutput {
     func didSelectLocation(_ location: Location, with forecast: Forecast) {
-        print(location)
+        presentForecast(forecast: forecast, location: location)
     }
 }
