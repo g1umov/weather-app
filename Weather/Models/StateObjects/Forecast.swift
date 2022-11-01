@@ -62,6 +62,7 @@ extension Forecast {
     }
     
     struct Hourly: Decodable {
+        let time: [String]
         let temperature2M: [Double?]
         let relativehumidity2M: [Int?]
         let precipitation: [Double?]
