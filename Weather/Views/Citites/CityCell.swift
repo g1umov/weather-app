@@ -40,7 +40,7 @@ final class CityCell: UITableViewCell {
     }
     
     func setup(_ viewModel: CityViewModel) {
-        iconView.image = UIImage(systemName: viewModel.weathercode)
+        iconView.image = viewModel.weathercode != nil ? UIImage(weathercode: viewModel.weathercode!) : nil
         cityLabel.text = viewModel.city
         temperatureLabel.text = viewModel.temperature
     }
