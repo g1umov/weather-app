@@ -8,21 +8,21 @@
 import UIKit
 
 final class CityCell: UITableViewCell {
-    lazy var iconView: UIImageView = {
+    private lazy var iconView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    lazy var cityLabel: UILabel = {
+    private lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22)
         label.textColor = .lightText
         return label
     }()
     
-    lazy var temperatureLabel: UILabel = {
+    private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36, weight: .medium)
         label.textColor = .white
@@ -54,27 +54,40 @@ final class CityCell: UITableViewCell {
     }
     
     private func setupLayouts() {
-        iconView.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        cityLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 18)
-        
+        setupIconViewLayout()
+        setupCityLabelLayout()
+        setupTemperatureLabelLayout()
+    }
+    
+    private func setupIconViewLayout() {
+        iconView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             iconView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             iconView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             iconView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor),
-            
+            iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor)
+        ])
+    }
+    
+    private func setupCityLabelLayout() {
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        NSLayoutConstraint.activate([
             cityLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             cityLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 18),
-            cityLabel.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            
+            cityLabel.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor)
+        ])
+    }
+    
+    private func setupTemperatureLabelLayout() {
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             temperatureLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             temperatureLabel.leadingAnchor.constraint(greaterThanOrEqualTo: cityLabel.trailingAnchor, constant: 12),
             temperatureLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
             temperatureLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
+    
 }
