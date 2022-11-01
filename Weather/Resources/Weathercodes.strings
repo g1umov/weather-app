@@ -1,0 +1,36 @@
+/* 
+  Weathercodes.strings
+  Weather
+
+  Created by Vladislav on 01.11.22.
+  
+*/
+
+"weathercode-0" = "Clear Sky";
+"weathercode-1" = "Mainly Clear";
+"weathercode-2" = "Partly Cloudy";
+"weathercode-3" = "Over Cast";
+"weathercode-45" = "Fog";
+"weathercode-48" = "Depositing Rime Fog";
+"weathercode-51" = "Drizzle Light";
+"weathercode-53" = "Drizzle Moderate";
+"weathercode-55" = "Drizzle Dense";
+"weathercode-56" = "Freezing Drizzle Light";
+"weathercode-57" = "Freezing Drizzle Dense";
+"weathercode-61" = "Rain Slight";
+"weathercode-63" = "Rain Moderate";
+"weathercode-65" = "Rain Heavy";
+"weathercode-66" = "Freezing Rain Light";
+"weathercode-67" = "Freezing Rain Heavy";
+"weathercode-71" = "Snow Fall Slight";
+"weathercode-73" = "Snow Fall Moderate";
+"weathercode-75" = "Snow Fall Heavy";
+"weathercode-77" = "Snow Grains";
+"weathercode-80" = "Rain Shower Slight";
+"weathercode-81" = "Rain Shower Moderate";
+"weathercode-82" = "Rain Shower Violent";
+"weathercode-85" = "Snow Shower Slight";
+"weathercode-86" = "Snow Shower Heavy";
+"weathercode-95" = "Thunderstorm";
+"weathercode-96" = "Thunderstorm Slight Hail";
+"weathercode-99" = "Thunderstorm Heavy Hail";
